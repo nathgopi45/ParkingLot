@@ -16,6 +16,6 @@ public class ParkingLotOwner {
     public boolean isParkingLotFull()
     {
 
-        return parkingLot.is;
+        return parkingLot.isParkingLotFull();
     }
 }

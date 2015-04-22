@@ -27,7 +27,12 @@ public class ParkingLot {
         return this.parkingLotInstance;
     }
 
-
+    boolean isParkingLotFull()
+    {
+        if(maximumParkingSize ==  currentParkingLotSize )
+            return true;
+        return false;
+    }
 
     private boolean isParkingSpaceAvailable() {
         if(maximumParkingSize >= ( currentParkingLotSize+1) )

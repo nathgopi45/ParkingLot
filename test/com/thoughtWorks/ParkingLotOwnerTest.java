@@ -1,5 +1,7 @@
 package com.thoughtWorks;
 
+import com.thoughtWorks.Traveller.Traveller;
+import com.thoughtWorks.Traveller.Vehicle;
 import com.thoughtWorks.com.thoughtWorks.parkingLot.ParkingLot;
 import com.thoughtWorks.com.thoughtWorks.parkingLot.ParkingLotOwner;
 import org.junit.Test;
@@ -12,12 +14,34 @@ import static org.junit.Assert.*;
 public class ParkingLotOwnerTest {
 
     @Test
-    public void testIsParkingLotFull() throws Exception {
+    public void testIsParkingLotNotFull() throws Exception {
 
         ParkingLot parkingLot = new ParkingLot(1);
         ParkingLotOwner parkingLotOwner = new ParkingLotOwner(parkingLot);
         boolean isParkingLotFull = parkingLotOwner.isParkingLotFull();
         assertTrue(!isParkingLotFull);
+
+    }
+
+    @Test(expected = Exception.class)
+    public void testIsParkingLotFullWithEmptyParkingLot() throws Exception {
+
+        ParkingLot parkingLot = null;
+        ParkingLotOwner parkingLotOwner = new ParkingLotOwner(parkingLot);
+        boolean isParkingLotFull = parkingLotOwner.isParkingLotFull();
+
+
+    }
+    @Test
+    public void testIsParkingLotFull() throws Exception {
+
+        ParkingLot parkingLot = new ParkingLot(1);
+        Vehicle car = new Vehicle();
+        Traveller traveller = new Traveller(car);
+        traveller.parkMyCar(parkingLot);
+        ParkingLotOwner parkingLotOwner = new ParkingLotOwner(parkingLot);
+        boolean isParkingLotFull = parkingLotOwner.isParkingLotFull();
+        assertTrue(isParkingLotFull);
 
     }
 }
