@@ -1,4 +1,6 @@
-package com.thoughtWorks;
+package com.thoughtWorks.com.thoughtWorks.parkingLot;
+
+import com.thoughtWorks.Traveller.Vehicle;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,18 +15,19 @@ public class ParkingLot {
     private static int currentParkingLotSize = 0;
     private static Map<Double, Vehicle> parkedVehicleDetail = new HashMap<Double,Vehicle>();
 
-     private ParkingLot(int maximumParkingSize){
-
+     public ParkingLot(int maximumParkingSize) throws  Exception{
+        if(maximumParkingSize <=0) throw new Exception();
          this.maximumParkingSize = maximumParkingSize;
      }
 
-    public static ParkingLot getParkingLotInstance(int maximumParkingSize) throws Exception{
-        if (maximumParkingSize <=0) throw new Exception();
-        if(null == parkingLotInstance){
-            parkingLotInstance = new ParkingLot(maximumParkingSize);
-        }
-       return parkingLotInstance;
+
+
+    private ParkingLot getInitialisedParkingLot()
+    {
+        return this.parkingLotInstance;
     }
+
+
 
     private boolean isParkingSpaceAvailable() {
         if(maximumParkingSize >= ( currentParkingLotSize+1) )
@@ -41,6 +44,16 @@ public class ParkingLot {
             return parkingId;
         }
         throw new Exception("");
+    }
+
+    public Vehicle unPark(double parkingId) throws Exception
+
+    {
+        Vehicle vehicle =parkedVehicleDetail.get(parkingId);
+        if(vehicle == null) throw new Exception();
+
+        return vehicle;
+
     }
 
 

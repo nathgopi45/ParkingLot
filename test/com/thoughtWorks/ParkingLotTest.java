@@ -1,12 +1,12 @@
 package com.thoughtWorks;
 
-import com.thoughtWorks.ParkingLot;
-import com.thoughtWorks.ParkingSpace;
-/*import com.thoughtWorks.Vehicle;*/
-import com.thoughtWorks.Vehicle;
+/*import com.thoughtWorks.Traveller.Vehicle;*/
+import com.thoughtWorks.Traveller.Vehicle;
 
+import com.thoughtWorks.com.thoughtWorks.parkingLot.ParkingLot;
 import org.junit.Test;
 
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -16,22 +16,22 @@ public class ParkingLotTest {
 
 
     @Test
-    public void shouldCreateParkingLot() {
+    public void shouldCreateParkingLot() throws Exception{
         ParkingLot parkingLot = new ParkingLot(2);
-        assertTrue(parkingLot.getParkingSpaces()>0);
+        assertNotNull(parkingLot);
     }
 
-    @Test
-    public void testIfParkingSpaceIsAvailable() {
-
-        ParkingLot parkingLot = new ParkingLot(2);
-        assertTrue(parkingLot.isParkingSpaceAvailable());
+    @Test(expected = Exception.class)
+    public void shouldNotCreateParkingLotWithEmptySize() throws Exception{
+        ParkingLot parkingLot = new ParkingLot(0);
     }
 
     @Test
     public void testIfVehicleCanPark() throws Exception{
         ParkingLot parkingLot = new ParkingLot(2);
-        assertTrue(parkingLot.park(new Vehicle()).equalsIgnoreCase("SUCCESS"));
+        Vehicle vehicle = new Vehicle();
+        Double parkingId = parkingLot.park(vehicle);
+        assertNotNull(parkingId);
     }
 
     @Test(expected = Exception.class)
@@ -41,5 +41,13 @@ public class ParkingLotTest {
         parkingLot.park(new Vehicle());
     }
 
+
+@Test(expected = Exception.class)
+public void testParkingIfVehicleIsEmpty () throws Exception
+{
+    ParkingLot parkingLot = new ParkingLot(1);
+    Vehicle vehicle = null;
+    parkingLot.park(vehicle);
+}
 
 }
