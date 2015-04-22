@@ -4,11 +4,15 @@ import com.thoughtWorks.Traveller.Vehicle;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Observable;
+import java.util.Observer;
 
 /**
  * Created by user on 4/21/2015.
  */
-public class ParkingLot {
+public class ParkingLot extends Observable{
+
+
 
     private final int maximumParkingSize ;
     private static int currentParkingLotSize = 0;
@@ -38,6 +42,11 @@ public class ParkingLot {
             currentParkingLotSize++;
             double parkingId = Math.random();
             parkedVehicleDetail.put(parkingId,vehicle);
+
+            if(isParkingLotFull()){
+                setChanged();
+                notifyObservers(new Boolean(true));
+            }
             return parkingId;
         }
         throw new Exception("");
@@ -48,7 +57,7 @@ public class ParkingLot {
     {
         Vehicle vehicle =parkedVehicleDetail.get(parkingId);
         if(vehicle == null) throw new Exception();
-
+        notifyObservers(new Boolean(false));
         return vehicle;
 
     }
