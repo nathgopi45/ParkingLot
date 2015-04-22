@@ -30,25 +30,23 @@ public class ParkingLot extends Observable{
         return false;
     }
 
-    private boolean isParkingSpaceAvailable() {
-        if(maximumParkingSize >= ( currentParkingLotSize+1) )
-            return true;
-        return false;
+    private void notifyParkingLotOwnerIfParkingLotFull()
+    {
+        if(isParkingLotFull()){
+            setChanged();
+            notifyObservers(new Boolean(true));
+        }
     }
 
     public double park(Vehicle vehicle) throws Exception{
 
         if(null == vehicle) throw new Exception();
 
-        if (isParkingSpaceAvailable()) {
+        if (!isParkingLotFull()) {
             currentParkingLotSize++;
             double parkingId = Math.random();
             parkedVehicleDetail.put(parkingId,vehicle);
-
-            if(isParkingLotFull()){
-                setChanged();
-                notifyObservers(new Boolean(true));
-            }
+            notifyParkingLotOwnerIfParkingLotFull();
             return parkingId;
         }
         throw new Exception("");
