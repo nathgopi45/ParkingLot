@@ -15,9 +15,12 @@ public class ParkingLotOwner implements Observer{
     public void update(Observable observable,Object object)
     {
         this.isParkingLotFull = (Boolean)object;
-        System.out.println("Upate...");
+        if(isParkingLotFull) parkingLotStatusMessage();
     }
 
+    public void parkingLotStatusMessage(){
+        System.out.println("FULL");
+    }
     public ParkingLotOwner(ParkingLot parkingLot) throws Exception
     {
 
@@ -26,7 +29,8 @@ public class ParkingLotOwner implements Observer{
         parkingLot.addObserver(this);
     }
 
-    public boolean isParkingLotFull() {
+    public boolean isParkingLotFull()
+    {
         return this.isParkingLotFull;
     }
 }

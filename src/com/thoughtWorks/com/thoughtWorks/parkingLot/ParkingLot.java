@@ -59,9 +59,13 @@ public class ParkingLot extends Observable{
     {
         Vehicle vehicle =parkedVehicleDetail.get(parkingId);
         if(vehicle == null) throw new Exception();
+
+        if(currentParkingLotSize==maximumParkingSize)
+        {
+            setChanged();
+            notifyObservers(new Boolean(false));
+        }
         currentParkingLotSize--;
-        setChanged();
-        notifyObservers(new Boolean(false));
         return vehicle;
 
     }

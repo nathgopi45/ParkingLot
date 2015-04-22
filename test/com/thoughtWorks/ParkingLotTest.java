@@ -1,13 +1,19 @@
 package com.thoughtWorks;
 
 /*import com.thoughtWorks.Traveller.Vehicle;*/
+import com.thoughtWorks.Traveller.Traveller;
 import com.thoughtWorks.Traveller.Vehicle;
 
 import com.thoughtWorks.com.thoughtWorks.parkingLot.ParkingLot;
+import com.thoughtWorks.com.thoughtWorks.parkingLot.ParkingLotOwner;
 import org.junit.Test;
+
+import java.util.Observable;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.*;
 
 /**
  * Created by user on 4/21/2015.
@@ -42,12 +48,42 @@ public class ParkingLotTest {
     }
 
 
-@Test(expected = Exception.class)
-public void testParkingIfVehicleIsEmpty () throws Exception
-{
-    ParkingLot parkingLot = new ParkingLot(1);
-    Vehicle vehicle = null;
-    parkingLot.park(vehicle);
-}
+    @Test(expected = Exception.class)
+    public void testParkingIfVehicleIsEmpty () throws Exception
+    {
+        ParkingLot parkingLot = new ParkingLot(1);
+        Vehicle vehicle = null;
+        parkingLot.park(vehicle);
+    }
+
+
+    @Test
+    public void testParkingLotOwnerShouldGetNotifiedWhenFull() throws Exception {
+        ParkingLot parkingLot = new ParkingLot(1);
+        Vehicle vehicle = new Vehicle();
+        ParkingLotOwner parkingLotOwner = mock(ParkingLotOwner.class);
+        doNothing().when(parkingLotOwner).update(any(Observable.class),any());
+        parkingLot.addObserver(parkingLotOwner);
+
+        Traveller traveller = new Traveller(vehicle);
+        traveller.parkMyCar(parkingLot);
+
+        verify(parkingLotOwner).update(any(Observable.class),any());
+
+    }
+
+    @Test
+    public void testNotifyParkingLotOwnerWhenUnparkedAndParkingLotWasFull() throws Exception {
+
+        ParkingLot parkingLot = new ParkingLot(1);
+        Vehicle vehicle = new Vehicle();
+        ParkingLotOwner parkingLotOwner = mock(ParkingLotOwner.class);
+        doNothing().when(parkingLotOwner).update(any(Observable.class), any());
+        Traveller traveller = new Traveller(vehicle);
+        traveller.parkMyCar(parkingLot);
+        parkingLot.addObserver(parkingLotOwner);
+        traveller.unParkMyCar(parkingLot);
+        verify(parkingLotOwner).update(any(Observable.class),any());
+    }
 
 }

@@ -41,6 +41,17 @@ public class ParkingLotOwnerTest {
         assertTrue(parkingLotOwner.isParkingLotFull());
     }
 
+    @Test
+    public void testIsParkingLotFullMessagePrinting() throws Exception {
+
+        ParkingLot parkingLot = new ParkingLot(1);
+        ParkingLotOwner parkingLotOwner = new ParkingLotOwner(parkingLot);
+        Vehicle car = new Vehicle();
+        Traveller traveller = new Traveller(car);
+        traveller.parkMyCar(parkingLot);
+        assertTrue(parkingLotOwner.isParkingLotFull());
+    }
+
 
     @Test
     public void testIsParkingLotHasSpaceAfterUnParking() throws Exception {
@@ -53,6 +64,7 @@ public class ParkingLotOwnerTest {
         ParkingLotOwner parkingLotOwner = new ParkingLotOwner(parkingLot);
         assertTrue(!parkingLotOwner.isParkingLotFull());
     }
+
 
 
 }
