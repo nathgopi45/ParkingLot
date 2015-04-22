@@ -2,7 +2,7 @@ package com.thoughtWorks;
 
 import com.thoughtWorks.Traveller.Traveller;
 import com.thoughtWorks.Traveller.Vehicle;
-import com.thoughtWorks.com.thoughtWorks.parkingLot.ParkingLot;
+import com.thoughtWorks.parkingLot.ParkingLot;
 import junit.framework.Assert;
 import org.junit.Test;
 

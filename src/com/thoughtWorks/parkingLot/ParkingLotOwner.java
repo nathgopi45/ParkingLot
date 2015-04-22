@@ -1,4 +1,4 @@
-package com.thoughtWorks.com.thoughtWorks.parkingLot;
+package com.thoughtWorks.parkingLot;
 
 import java.util.Observable;
 import java.util.Observer;

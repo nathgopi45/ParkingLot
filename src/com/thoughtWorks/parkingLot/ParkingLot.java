@@ -1,4 +1,4 @@
-package com.thoughtWorks.com.thoughtWorks.parkingLot;
+package com.thoughtWorks.parkingLot;
 
 import com.thoughtWorks.Traveller.Vehicle;
 

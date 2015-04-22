@@ -2,8 +2,8 @@ package com.thoughtWorks;
 
 import com.thoughtWorks.Traveller.Traveller;
 import com.thoughtWorks.Traveller.Vehicle;
-import com.thoughtWorks.com.thoughtWorks.parkingLot.ParkingLot;
-import com.thoughtWorks.com.thoughtWorks.parkingLot.ParkingLotOwner;
+import com.thoughtWorks.parkingLot.ParkingLot;
+import com.thoughtWorks.parkingLot.ParkingLotOwner;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

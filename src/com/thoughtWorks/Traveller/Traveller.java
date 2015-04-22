@@ -1,6 +1,6 @@
 package com.thoughtWorks.Traveller;
 
-import com.thoughtWorks.com.thoughtWorks.parkingLot.ParkingLot;
+import com.thoughtWorks.parkingLot.ParkingLot;
 
 /**
  * Created by user on 4/22/2015.

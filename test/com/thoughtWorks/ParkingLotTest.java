@@ -4,8 +4,8 @@ package com.thoughtWorks;
 import com.thoughtWorks.Traveller.Traveller;
 import com.thoughtWorks.Traveller.Vehicle;
 
-import com.thoughtWorks.com.thoughtWorks.parkingLot.ParkingLot;
-import com.thoughtWorks.com.thoughtWorks.parkingLot.ParkingLotOwner;
+import com.thoughtWorks.parkingLot.ParkingLot;
+import com.thoughtWorks.parkingLot.ParkingLotOwner;
 import org.junit.Test;
 
 import java.util.Observable;
@@ -83,7 +83,7 @@ public class ParkingLotTest {
         traveller.parkMyCar(parkingLot);
         parkingLot.addObserver(parkingLotOwner);
         traveller.unParkMyCar(parkingLot);
-        verify(parkingLotOwner).update(any(Observable.class),any());
+        verify(parkingLotOwner).update(any(Observable.class), any());
     }
 
 }
