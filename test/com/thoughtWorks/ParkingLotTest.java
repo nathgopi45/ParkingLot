@@ -1,10 +1,10 @@
-package com.thoughtWorks.test;
+package com.thoughtWorks;
 
 import com.thoughtWorks.ParkingLot;
 import com.thoughtWorks.ParkingSpace;
 /*import com.thoughtWorks.Vehicle;*/
 import com.thoughtWorks.Vehicle;
-import org.codehaus.groovy.runtime.DefaultGroovyMethods;
+
 import org.junit.Test;
 
 import static org.junit.Assert.assertTrue;
