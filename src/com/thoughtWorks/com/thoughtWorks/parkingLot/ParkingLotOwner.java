@@ -13,9 +13,17 @@ public class ParkingLotOwner {
         this.parkingLot = parkingLot;
     }
 
-    public boolean isParkingLotFull()
+    private boolean isParkingLotFull()
     {
-
         return parkingLot.isParkingLotFull();
     }
+
+    public String checkParkingLotisFULL(){
+
+        if(isParkingLotFull()){
+            return "FULL";
+        }
+        return "NOT FULL";
+    }
+
 }

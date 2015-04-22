@@ -18,8 +18,8 @@ public class ParkingLotOwnerTest {
 
         ParkingLot parkingLot = new ParkingLot(1);
         ParkingLotOwner parkingLotOwner = new ParkingLotOwner(parkingLot);
-        boolean isParkingLotFull = parkingLotOwner.isParkingLotFull();
-        assertTrue(!isParkingLotFull);
+        String isParkingLotFull = parkingLotOwner.checkParkingLotisFULL();
+        assertTrue(isParkingLotFull.equalsIgnoreCase("NOT FULL"));
 
     }
 
@@ -28,7 +28,7 @@ public class ParkingLotOwnerTest {
 
         ParkingLot parkingLot = null;
         ParkingLotOwner parkingLotOwner = new ParkingLotOwner(parkingLot);
-        boolean isParkingLotFull = parkingLotOwner.isParkingLotFull();
+        String isParkingLotFull = parkingLotOwner.checkParkingLotisFULL();
 
 
     }
@@ -40,8 +40,23 @@ public class ParkingLotOwnerTest {
         Traveller traveller = new Traveller(car);
         traveller.parkMyCar(parkingLot);
         ParkingLotOwner parkingLotOwner = new ParkingLotOwner(parkingLot);
-        boolean isParkingLotFull = parkingLotOwner.isParkingLotFull();
-        assertTrue(isParkingLotFull);
-
+        String isParkingLotHasSpace = parkingLotOwner.checkParkingLotisFULL();
+        assertTrue(isParkingLotHasSpace.equalsIgnoreCase("FULL"));
     }
+
+
+    @Test
+    public void testIsParkingLotHasSpaceAfterUnParking() throws Exception {
+
+        ParkingLot parkingLot = new ParkingLot(1);
+        Vehicle car = new Vehicle();
+        Traveller traveller = new Traveller(car);
+        traveller.parkMyCar(parkingLot);
+        traveller.unParkMyCar(parkingLot);
+        ParkingLotOwner parkingLotOwner = new ParkingLotOwner(parkingLot);
+        String isParkingLotHasSpace = parkingLotOwner.checkParkingLotisFULL();
+        assertTrue(isParkingLotHasSpace.equalsIgnoreCase("NOT FULL"));
+    }
+
+
 }

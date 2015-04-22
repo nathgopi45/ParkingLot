@@ -11,7 +11,6 @@ import java.util.Map;
 public class ParkingLot {
 
     private final int maximumParkingSize ;
-    private static ParkingLot parkingLotInstance;
     private static int currentParkingLotSize = 0;
     private static Map<Double, Vehicle> parkedVehicleDetail = new HashMap<Double,Vehicle>();
 
@@ -19,13 +18,6 @@ public class ParkingLot {
         if(maximumParkingSize <=0) throw new Exception();
          this.maximumParkingSize = maximumParkingSize;
      }
-
-
-
-    private ParkingLot getInitialisedParkingLot()
-    {
-        return this.parkingLotInstance;
-    }
 
     boolean isParkingLotFull()
     {
