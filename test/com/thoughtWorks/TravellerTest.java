@@ -28,6 +28,6 @@ public class TravellerTest {
         ParkingLot parkingLot = new ParkingLot(2);
         Double parkingId = traveller.parkMyCar(parkingLot);
         Vehicle returnedCar = traveller.unParkMyCar(parkingLot);
-        Assert.assertTrue(returnedCar.equals(vehicle.hashCode()));
+        Assert.assertTrue(returnedCar==vehicle);
     }
 }

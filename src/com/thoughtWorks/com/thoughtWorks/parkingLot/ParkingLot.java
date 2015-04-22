@@ -15,7 +15,7 @@ public class ParkingLot extends Observable{
 
 
     private final int maximumParkingSize ;
-    private static int currentParkingLotSize = 0;
+    private  int currentParkingLotSize = 0;
     private static Map<Double, Vehicle> parkedVehicleDetail = new HashMap<Double,Vehicle>();
 
      public ParkingLot(int maximumParkingSize) throws  Exception{
@@ -37,6 +37,8 @@ public class ParkingLot extends Observable{
     }
 
     public double park(Vehicle vehicle) throws Exception{
+
+        if(null == vehicle) throw new Exception();
 
         if (isParkingSpaceAvailable()) {
             currentParkingLotSize++;
