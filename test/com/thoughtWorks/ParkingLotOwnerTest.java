@@ -36,8 +36,7 @@ public class ParkingLotOwnerTest {
         ParkingLot parkingLot = new ParkingLot(1);
         ParkingLotOwner parkingLotOwner = new ParkingLotOwner(parkingLot);
         Vehicle car = new Vehicle();
-        Traveller traveller = new Traveller(car);
-        traveller.parkMyCar(parkingLot);
+        double parkingId = parkingLot.park(car);
         assertTrue(parkingLotOwner.isParkingLotFull());
     }
 
@@ -47,8 +46,7 @@ public class ParkingLotOwnerTest {
         ParkingLot parkingLot = new ParkingLot(1);
         ParkingLotOwner parkingLotOwner = new ParkingLotOwner(parkingLot);
         Vehicle car = new Vehicle();
-        Traveller traveller = new Traveller(car);
-        traveller.parkMyCar(parkingLot);
+        double parkingId = parkingLot.park(car);
         assertTrue(parkingLotOwner.isParkingLotFull());
     }
 
@@ -59,8 +57,8 @@ public class ParkingLotOwnerTest {
         ParkingLot parkingLot = new ParkingLot(1);
         Vehicle car = new Vehicle();
         Traveller traveller = new Traveller(car);
-        traveller.parkMyCar(parkingLot);
-        traveller.unParkMyCar(parkingLot);
+        double parkingId = parkingLot.park(car);
+        parkingLot.unPark(parkingId);
         ParkingLotOwner parkingLotOwner = new ParkingLotOwner(parkingLot);
         assertTrue(!parkingLotOwner.isParkingLotFull());
     }

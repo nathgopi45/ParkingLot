@@ -33,7 +33,7 @@ public class ParkingLot extends Observable{
          this.maximumParkingSize = maximumParkingSize;
      }
 
-    boolean isParkingLotFull()
+   public boolean isParkingLotFull()
     {
         if(maximumParkingSize ==  currentParkingLotSize )
             return true;

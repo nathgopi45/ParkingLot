@@ -67,8 +67,7 @@ public class ParkingLotTest {
         doNothing().when(parkingLotOwner).update(any(Observable.class),any());
         parkingLot.addObserverFor100PercentFull(parkingLotOwner);
 
-        Traveller traveller = new Traveller(vehicle);
-        traveller.parkMyCar(parkingLot);
+        parkingLot.park(vehicle);
 
         verify(parkingLotOwner).update(any(Observable.class), any());
 
@@ -82,9 +81,9 @@ public class ParkingLotTest {
         ParkingLotOwner parkingLotOwner = mock(ParkingLotOwner.class);
         doNothing().when(parkingLotOwner).update(any(Observable.class), any());
         Traveller traveller = new Traveller(vehicle);
-        traveller.parkMyCar(parkingLot);
+        double parkingID = parkingLot.park(vehicle);
         parkingLot.addObserverFor100PercentFull(parkingLotOwner);
-        traveller.unParkMyCar(parkingLot);
+        parkingLot.unPark(parkingID);
         verify(parkingLotOwner).update(any(Observable.class), any());
     }
 

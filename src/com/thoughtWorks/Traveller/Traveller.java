@@ -1,6 +1,7 @@
 package com.thoughtWorks.Traveller;
 
 import com.thoughtWorks.parkingLot.ParkingLot;
+import com.thoughtWorks.parkingLot.parkingAttendant.ParkingAttendant;
 
 /**
  * Created by user on 4/22/2015.
@@ -15,10 +16,10 @@ public class Traveller {
         this.car = car;
     }
 
-    public double parkMyCar (ParkingLot parkingLot) throws Exception
+    public double parkMyCar (ParkingAttendant parkingAttendant) throws Exception
     {
 
-
+       ParkingLot parkingLot = parkingAttendant.getAvailbleParkingLot();
        return this.parkingId = parkingLot.park(this.car);
     }
 
