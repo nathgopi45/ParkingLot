@@ -1,11 +1,9 @@
 package com.thoughtWorks.parkingLot;
 
 import com.thoughtWorks.Traveller.Vehicle;
+import com.thoughtWorks.parkingLot.FBIAgent.FBIAgent;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Observable;
-import java.util.Observer;
+import java.util.*;
 
 /**
  * Created by user on 4/21/2015.
@@ -17,6 +15,18 @@ public class ParkingLot extends Observable{
     private final int maximumParkingSize ;
     private  int currentParkingLotSize = 0;
     private static Map<Double, Vehicle> parkedVehicleDetail = new HashMap<Double,Vehicle>();
+
+    private List<Observer> subscriberFor100PercentFull =  new ArrayList<Observer>();
+
+    private List<Observer> subscriberFor80PercentFull =  new ArrayList<Observer>();
+
+    public List<Observer> getSubscriberFor80PercentFull() {
+        return subscriberFor80PercentFull;
+    }
+
+    public List<Observer> getSubscriberFor100PercentFull() {
+        return subscriberFor100PercentFull;
+    }
 
      public ParkingLot(int maximumParkingSize) throws  Exception{
         if(maximumParkingSize <=0) throw new Exception();
@@ -33,11 +43,31 @@ public class ParkingLot extends Observable{
     private void notifyParkingLotOwnerIfParkingLotFull()
     {
         if(isParkingLotFull()){
-            setChanged();
-            notifyObservers(new Boolean(true));
+
+           for(Observer observer : subscriberFor100PercentFull)
+           {
+               observer.update(this,true);
+           }
         }
     }
 
+    private void notifyFBIAgentIfParkingLotIs80PercentFull(){
+
+        if(isParkingLotIs80PercentFull()){
+            for(Observer observer : subscriberFor80PercentFull)
+            {
+                observer.update(this,true);
+            }
+        }
+    }
+    private boolean isParkingLotIs80PercentFull(){
+
+        int eightyPercentSize = (int) (maximumParkingSize*0.8);
+        if(currentParkingLotSize>=eightyPercentSize){
+            return true;
+        }
+        return false;
+    }
     public double park(Vehicle vehicle) throws Exception{
 
         if(null == vehicle) throw new Exception();
@@ -47,6 +77,7 @@ public class ParkingLot extends Observable{
             double parkingId = Math.random();
             parkedVehicleDetail.put(parkingId,vehicle);
             notifyParkingLotOwnerIfParkingLotFull();
+            notifyFBIAgentIfParkingLotIs80PercentFull();
             return parkingId;
         }
         throw new Exception("");
@@ -60,8 +91,10 @@ public class ParkingLot extends Observable{
 
         if(currentParkingLotSize==maximumParkingSize)
         {
-            setChanged();
-            notifyObservers(new Boolean(false));
+            for(Observer observer : subscriberFor100PercentFull)
+            {
+                observer.update(this,false);
+            }
         }
         currentParkingLotSize--;
         return vehicle;
@@ -69,5 +102,11 @@ public class ParkingLot extends Observable{
     }
 
 
+    public void addObserverFor100PercentFull(ParkingLotOwner parkingLotOwner) {
+        subscriberFor100PercentFull.add(parkingLotOwner);
+    }
 
+    public void addObserverFor80PercentFull(FBIAgent fbiAgent) {
+        subscriberFor80PercentFull.add(fbiAgent);
+    }
 }

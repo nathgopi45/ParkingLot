@@ -21,7 +21,7 @@ public class ParkingLotOwner implements Observer{
 
         if(null == parkingLot) throw new Exception();
         this.parkingLot = parkingLot;
-        parkingLot.addObserver(this);
+        parkingLot.addObserverFor100PercentFull(this);
     }
 
     public boolean isParkingLotFull()
