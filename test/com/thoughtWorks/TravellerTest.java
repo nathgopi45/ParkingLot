@@ -12,6 +12,8 @@ import org.junit.rules.ExpectedException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertThat;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.mock;
@@ -30,11 +32,11 @@ public class TravellerTest {
     @Test
     public void testParkMyCar() throws Exception {
         parkingAttendant=mock(ParkingAttendant.class);
-        ParkingLot parkingLot = new ParkingLot(1);
-        when(parkingAttendant.getAvailbleParkingLot()).thenReturn(parkingLot);
+
+        when(parkingAttendant.parkVehicle((Vehicle) any())).thenReturn(9.0);
         Traveller traveller = new Traveller(new Vehicle());
         Double parkingId = traveller.parkMyCar(parkingAttendant);
-        Assert.assertNotNull(parkingId);
+        assertThat(parkingId, is(9.0));
 
     }
 
@@ -44,19 +46,19 @@ public class TravellerTest {
         Vehicle vehicle = new Vehicle();
         Traveller traveller = new Traveller(vehicle);
         ParkingLot parkingLot = new ParkingLot(2);
-        when(parkingAttendant.getAvailbleParkingLot()).thenReturn(parkingLot);
+        when(parkingAttendant.unParkVehicle((Double)any())).thenReturn(vehicle);
         Double parkingId = traveller.parkMyCar(parkingAttendant);
-        Vehicle returnedCar = traveller.unParkMyCar(parkingLot);
+        Vehicle returnedCar = traveller.unParkMyCar(parkingAttendant, parkingId);
         Assert.assertTrue(returnedCar == vehicle);
     }
 
     @Test
-    public void testIfNoSpaceAvailableMessageIfNoParkingLotAvailable() throws Exception {
+    public void testIfNoSpaceAvailableMessageGetsWhenNoParkingLotAvailableToPark() throws Exception {
         expectedException.expect(Exception.class);
         expectedException.expectMessage(NO_PARKING_LOT_AVILBLE);
         parkingAttendant = mock(ParkingAttendant.class);
         Exception exception = new Exception(NO_PARKING_LOT_AVILBLE);
-        when(parkingAttendant.getAvailbleParkingLot()).thenThrow(exception);
+        when(parkingAttendant.parkVehicle((Vehicle)any())).thenThrow(exception);
         Vehicle vehicle = new Vehicle();
         Traveller traveller = new Traveller(vehicle);/*
         ParkingLot firstParkingLot = new ParkingLot(1);

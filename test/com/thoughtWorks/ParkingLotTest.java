@@ -6,9 +6,8 @@ import com.thoughtWorks.Traveller.Vehicle;
 
 import com.thoughtWorks.parkingLot.FBIAgent.FBIAgent;
 import com.thoughtWorks.parkingLot.ParkingLot;
-import com.thoughtWorks.parkingLot.ParkingLotOwner;
+import com.thoughtWorks.parkingLot.parkingAttendant.ParkingLotOwner;
 import org.junit.Test;
-import org.mockito.Mock;
 
 import java.util.Observable;
 
